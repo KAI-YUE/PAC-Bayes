@@ -1,0 +1,50 @@
+# device: "cuda" | "cpu"
+device: cuda
+seed: 2002
+
+# hyperparameters and model type
+# momentum:         momentum settings for SGD  
+epochs: 200
+batch_size: 128
+workers: 8
+#-------------------
+optimizer: "SGD"
+nesterov: True
+lr: 1.e-1
+min_lr: 1.e-4
+momentum: 0.9
+weight_decay: 5.e-4
+#-------------------
+scheduler: "CosineAnnealingLR"
+# weight_decay: 0.01
+
+model: "resnet18_gn"
+checkpoint_path: ""
+# checkpoint_path: "/mnt/ex-ssd/Projects/CV/indprivacy/experiments/0321_2343/checkpoint.pth"
+
+# Simulation dataset configurations
+dataset: "cifar10"
+data_path: "/mnt/ex-ssd/Datasets/cifar"
+
+# subset indices configurations 
+idx_path: "data/idx_0.8.dat"
+
+# # pruning parameters 
+# num_realizations: 3
+# prune_scheme: "uniform"
+# prune_scheme: "grand"
+# fraction: 0.4
+# prune_epoch: 10
+
+subset_keyword: "highscore_sensitive"
+max_grad_norm: 5
+epsilon: 30
+delta: 1.e-5
+
+# Log configurations
+output_folder: "experiments"
+test_interval: 1
+print_every:   100
+log_level:   "INFO"
+log_file:    "./train.log"
+

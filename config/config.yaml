@@ -1,0 +1,100 @@
+# device: "cuda" | "cpu"
+device: cuda
+seed: 385
+
+# hyperparameters and model type
+# momentum:         momentum settings for SGD  
+epochs: 50
+batch_size: 128
+workers: 8
+#-------------------
+optimizer: "SGD"
+nesterov: True
+lr: 1.e-1
+min_lr: 1.e-2
+momentum: 0.9
+weight_decay: 5.e-4
+
+# optimizer: "Adam"
+# nesterov: True
+# lr: 3.e-4
+# min_lr: 3.e-4
+
+#-------------------
+scheduler: "CosineAnnealingLR"
+# weight_decay: 0.01
+train_error: 0.001       # when to stop training
+
+# prepare a different set of parameters for dp optimizer 
+#-------------------
+dp_batch_size: 128
+dp_optimizer: "SGD"
+dp_nesterov: True
+dp_lr: 1.e-2
+dp_min_lr: 1.e-2
+dp_momentum: 0.9
+dp_weight_decay: 0.
+#-------------------
+
+pretrained: True
+pretrained: False
+
+model: "resnet18_nonorm"
+# model: "resnet50_gn"
+# model: "lenet_5"
+# model: "resnet18"
+model: "vgg7"
+checkpoint_path: ""
+# checkpoint_path: "/mnt/ex-ssd/Projects/CV/indprivacy_train/model_zoo/resnet18/sens0.9/0518_2340/checkpoint_epoch395.pth"
+# checkpoint_path: "model_zoo/q1/resnet18/0614_1107/checkpoint_epoch.pth"
+# checkpoint_path: "/mnt/ex-ssd/Projects/CV/indprivacy_train/model_zoo/resnet18/sens0.9/0517_2113/checkpoint194.pth"
+# checkpoint_path: "/mnt/ex-ssd/Projects/CV/indprivacy_train/model_zoo/resnet18/sens0.9/0615_1926/checkpoint_epoch.pth"
+# checkpoint_path: "/mnt/ex-ssd/Projects/CV/indprivacy_train/model_zoo/resnet18/sens0.9/0615_2154/checkpoint_epoch.pth"
+
+# Simulation dataset configurations
+dataset: "cifar10"
+data_path: "/mnt/ex-ssd/Datasets/cifar10"
+# dataset: "fmnist"
+# data_path: "/mnt/ex-ssd/Datasets/fmnist/"
+
+# subset indices configurations 
+idx_path: "data/resnet18/sens0.9/q0.1.dat"
+# idx_path: "data/fmnist/q0.0.dat"
+# idx_path: "data/cifar10/q0.1.dat"
+
+# # pruning parameters 
+# num_realizations: 3
+# prune_scheme: "uniform"
+# prune_scheme: "grand"
+# fraction: 0.4
+# prune_epoch: 10
+
+dp_on: True
+dp_on: False
+
+clip_on: True
+# clip_on: False
+
+noise_on: True
+# noise_on: False
+
+include_sensitive_epoch: 0
+include_sensitive_freq: 1
+use_sensitive: True
+use_sensitive: False
+use_insensitive: True
+# use_insensitive: False
+subset_keyword: "highscore_sensitive"
+subset_keyword: "lowscore_sensitive"
+# subset_keyword: "random_sensitive"
+bound: 0.4
+std: 1.
+delta: 1.e-5
+
+# Log configurations
+output_folder: "experiments"
+test_interval: 1
+print_every:   100
+log_level:   "INFO"
+log_file:    "./train.log"
+
